@@ -6,8 +6,8 @@ export class ProductsController {
     constructor(private readonly productsService: ProductsService) {}
 
     @Get()
-    indexProducts() {
-        return { id: 'this can be seen' }
+    getAllProducts() {
+        return { products: this.productsService.getProducts() }
     }
 
     @Post()
