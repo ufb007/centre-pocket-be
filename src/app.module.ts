@@ -6,6 +6,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { SummaryModule } from './summary/summary.module';
 import { ReportModule } from './report/report.module';
 import { ProductsModule } from './products/products.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   controllers: [
@@ -18,7 +19,18 @@ import { ProductsModule } from './products/products.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true
-    }), 
+    }),
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: 'root',
+      database: 'centre-pocket',
+      entities: [],
+      synchronize: true,
+      autoLoadEntities: true
+    }),
     SummaryModule, 
     ReportModule, 
     ProductsModule
