@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  nginx:
+    image: jwilder/nginx-proxy
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./docker/nginx/nginx-conf:/etc/nginx/conf.d
+    depends_on:
+      - node-client-web
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    container_name: centre-pocket-db
+    cap_add:
+      - SYS_NICE
+    restart: always
+    environment:
+      - MYSQL_DATABASE='centre-pocket'
+      - MYSQL_USER='root'
+      - MYSQL_PASSWORD='root'
+      - MYSQL_ROOT_PASSWORD='root'
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./data/db:/var/lib/mysql
+
+  node-client-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: centrepocket
+    environment:
+      - VIRTUAL_HOST=centrepocket.test
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mysql
+    volumes:
+      - ./src:/app/src
