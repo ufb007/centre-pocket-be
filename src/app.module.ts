@@ -7,6 +7,8 @@ import { SummaryModule } from './summary/summary.module';
 import { ReportModule } from './report/report.module';
 import { ProductsModule } from './products/products.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Player } from './entities/Player';
+import { PlayersModule } from './players/players.module';
 
 @Module({
   controllers: [
@@ -27,13 +29,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: 'root',
       password: 'root',
       database: 'centre-pocket',
-      entities: [],
+      entities: [Player],
       synchronize: true,
       autoLoadEntities: true
     }),
     SummaryModule, 
     ReportModule, 
-    ProductsModule
+    ProductsModule,
+    PlayersModule
   ]
 })
 

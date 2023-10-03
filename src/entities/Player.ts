@@ -1,27 +1,33 @@
-import { Entity, Column, PrimaryGeneratedColumn, Index } from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn, Index, CreateDateColumn, UpdateDateColumn } from "typeorm"
 
 @Entity()
 export class Player {
     @PrimaryGeneratedColumn()
-    public id: Number;
+    public id: number;
 
     @Column()
     @Index()
-    public uuid: String;
+    public uuid: string;
 
     @Column()
     @Index()
-    public email: String;
+    public email: string;
 
     @Column()
-    public firstName: String;
+    public firstName: string;
 
     @Column()
-    public lastName: String;
+    public lastName: string;
 
     @Column()
-    public phone: String;
+    public phone: string;
 
     @Column()
-    public nationality: String;
+    public nationality: string;
+
+    @CreateDateColumn()
+    public created_at: Date;
+
+    @UpdateDateColumn()
+    public updated_at: Date;
 }

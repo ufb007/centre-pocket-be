@@ -5,7 +5,7 @@ export const PlayerSchema = new EntitySchema<Player>({
     name: 'Player',
     columns: {
         id: {
-            type: String,
+            type: Number,
             primary: true,
             generated: true
         },
@@ -28,6 +28,20 @@ export const PlayerSchema = new EntitySchema<Player>({
         },
         nationality: {
             type: String
+        },
+        created_at: {
+            type: "datetime",
+            transformer: {
+                from: (value: string) => new Date(value),
+                to: (value: Date) => value.toISOString()
+              }
+        },
+        updated_at: {
+            type: "datetime",
+            transformer: {
+                from: (value: string) => new Date(value),
+                to: (value: Date) => value.toISOString()
+              },
         }
     }
 })
