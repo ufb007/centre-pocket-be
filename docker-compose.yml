@@ -12,32 +12,37 @@ services:
       - node-client-web
       - mysql
 
-  mysql:
-    image: mysql:8.0
-    container_name: centre-pocket-db
-    cap_add:
-      - SYS_NICE
-    restart: always
-    environment:
-      - MYSQL_DATABASE='centre-pocket'
-      - MYSQL_USER='root'
-      - MYSQL_PASSWORD='root'
-      - MYSQL_ROOT_PASSWORD='root'
-    ports:
-      - '3306:3306'
-    volumes:
-      - ./data/db:/var/lib/mysql
-
   node-client-web:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: centrepocket
+    working_dir: /usr/src/app
+    container_name: centrepocket-web
     environment:
-      - VIRTUAL_HOST=centrepocket.test
+      - VIRTUAL_HOST=www.centrepocket.test
     ports:
-      - '3000:3000'
+      - "8080:8080"
+    expose:
+      - "8080"
     depends_on:
       - mysql
     volumes:
-      - ./src:/app/src
+      - .:/usr/src/app
+
+  mysql:
+    image: mysql:8.0
+    container_name: centrepocket-db
+    tty: true
+    volumes:
+      - ./data/db:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=centrepocket
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+
+volumes:
+  mysql:
+    driver: local

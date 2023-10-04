@@ -24,11 +24,11 @@ import { PlayersModule } from './players/players.module';
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: 'mysql',
       port: 3306,
       username: 'root',
       password: 'root',
-      database: 'centre-pocket',
+      database: 'centrepocket',
       entities: [Player],
       synchronize: true,
       autoLoadEntities: true
