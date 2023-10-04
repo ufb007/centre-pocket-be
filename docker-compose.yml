@@ -11,6 +11,7 @@ services:
     depends_on:
       - node-client-web
       - mysql
+      - node-client-fe
 
   node-client-web:
     build:
@@ -19,7 +20,7 @@ services:
     working_dir: /usr/src/app
     container_name: centrepocket-web
     environment:
-      - VIRTUAL_HOST=www.centrepocket.test
+      - VIRTUAL_HOST=api.centrepocket.test
     ports:
       - "8080:8080"
     expose:
@@ -28,6 +29,21 @@ services:
       - mysql
     volumes:
       - .:/usr/src/app
+
+  node-client-fe:
+    build:
+      context: .
+      dockerfile: /Users/ufukbozdemir/Documents/workspace/centre-pocket-react-fe/Dockerfile
+    working_dir: /usr/src
+    container_name: centrepocket-fe
+    environment:
+      - VIRTUAL_HOST=www.centrepocket.test
+    ports:
+      - "3000:3000"
+    expose:
+      - "3000"
+    volumes:
+      - .:/usr/src
 
   mysql:
     image: mysql:8.0
