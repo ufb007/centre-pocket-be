@@ -26,7 +26,7 @@ import { PlayersModule } from './players/players.module';
       type: 'mysql',
       host: 'mysql',
       port: 3306,
-      username: 'root',
+      username: 'centrepocket',
       password: 'root',
       database: 'centrepocket',
       entities: [Player],

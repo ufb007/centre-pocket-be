@@ -30,18 +30,12 @@ export const PlayerSchema = new EntitySchema<Player>({
             type: String
         },
         created_at: {
-            type: "datetime",
-            transformer: {
-                from: (value: string) => new Date(value),
-                to: (value: Date) => value.toISOString()
-              }
+            type: "timestamp",
+            default: () => "CURRENT_TIMESTAMP"
         },
         updated_at: {
-            type: "datetime",
-            transformer: {
-                from: (value: string) => new Date(value),
-                to: (value: Date) => value.toISOString()
-              },
+            type: "timestamp",
+            default: () => "CURRENT_TIMESTAMP"
         }
     }
 })

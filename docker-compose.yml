@@ -38,9 +38,9 @@ services:
     ports:
       - 3306:3306
     environment:
-      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=centrepocket
       - MYSQL_DATABASE=centrepocket
-      - MYSQL_USER=root
+      - MYSQL_USER=centrepocket
       - MYSQL_PASSWORD=root
 
 volumes:
