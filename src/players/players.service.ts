@@ -14,11 +14,13 @@ export class PlayersService {
     ){}
 
     async getAllPlayers(): Promise<Player[]> {
-        return await this.playersRepository.find();
+        return await this.playersRepository.find({
+            relations: ['profile']
+        });
     }
 
     getPlayerByUUID(uuid: string): Promise<Player | null> {
-        return this.playersRepository.findOneBy({ uuid });
+        return this.playersRepository.findOne({ where: {uuid}, relations: ['profile'] });
     }
 
     async createPlayer(body: IPlayer) {

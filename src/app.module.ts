@@ -9,6 +9,7 @@ import { ProductsModule } from './products/products.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Player } from './entities/Player';
 import { PlayersModule } from './players/players.module';
+import { TournamentsModule } from './tournaments/tournaments/tournaments.module';
 
 @Module({
   controllers: [
@@ -24,11 +25,11 @@ import { PlayersModule } from './players/players.module';
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'mysql',
+      host: process.env.MYSQL_DB_HOST,
       port: 3306,
-      username: 'centrepocket',
-      password: 'root',
-      database: 'centrepocket',
+      username: process.env.MYSQL_USERNAME,
+      password: process.env.MYSQL_PASSWORD,
+      database: process.env.MYSQL_DB_NAME,
       entities: [Player],
       synchronize: true,
       autoLoadEntities: true
@@ -36,7 +37,8 @@ import { PlayersModule } from './players/players.module';
     SummaryModule, 
     ReportModule, 
     ProductsModule,
-    PlayersModule
+    PlayersModule,
+    TournamentsModule
   ]
 })
 

@@ -1,4 +1,14 @@
-import { Entity, Column, PrimaryGeneratedColumn, Index, CreateDateColumn, UpdateDateColumn } from "typeorm"
+import { 
+    Entity, 
+    Column, 
+    PrimaryGeneratedColumn, 
+    Index, 
+    CreateDateColumn, 
+    UpdateDateColumn, 
+    OneToOne, 
+    JoinColumn 
+} from "typeorm"
+import { Profile } from "./Profile";
 
 @Entity()
 export class Player {
@@ -6,11 +16,11 @@ export class Player {
     public id: number;
 
     @Column()
-    @Index()
+    @Index({ unique: true })
     public uuid: string;
 
     @Column()
-    @Index()
+    @Index({ unique: true })
     public email: string;
 
     @Column()
@@ -30,4 +40,8 @@ export class Player {
 
     @UpdateDateColumn()
     public updated_at: Date;
+
+    @OneToOne(() => Profile)
+    @JoinColumn({ name: 'profile_id' })
+    public profile: Profile;
 }
