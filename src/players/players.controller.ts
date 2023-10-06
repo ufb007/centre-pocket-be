@@ -7,15 +7,19 @@ export class PlayersController {
     constructor(private playersService: PlayersService){}
 
     @Get()
-    getAllPlayers() {
-        return this.playersService.getAllPlayers()
+    getAllPlayers(): Promise<PlayerResponseDto[]> {
+        return this.playersService.getAllPlayers().then(players => {
+            return players.map((player) => new PlayerResponseDto(player))
+        })
     }
 
     @Get(':uuid')
     getPlayerByUUID(
         @Param('uuid', ParseUUIDPipe) uuid: string
-    ) {
-        return this.playersService.getPlayerByUUID(uuid)
+    ): Promise<PlayerResponseDto> {
+        return this.playersService.getPlayerByUUID(uuid).then((player) => {
+            return new PlayerResponseDto(player);
+        })
     }
 
     @Post()
@@ -29,10 +33,10 @@ export class PlayersController {
     updatePlayer(
         @Param('uuid', ParseUUIDPipe) uuid: string,
         @Body() body: UpdatePlayerDto
-    ) {
-        const response = this.playersService.updatePlayer(uuid, body);
-
-        return response;
+    ): Promise<PlayerResponseDto> {
+        return this.playersService.updatePlayer(uuid, body).then(player => {
+            return player = new PlayerResponseDto(player);
+        });
     }
 
     @Delete(':uuid')

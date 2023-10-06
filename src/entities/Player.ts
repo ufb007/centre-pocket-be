@@ -24,10 +24,16 @@ export class Player {
     public email: string;
 
     @Column()
+    public password: string;
+
+    @Column()
     public firstName: string;
 
     @Column()
     public lastName: string;
+
+    @Column()
+    public alias: string;
 
     @Column()
     public phone: string;

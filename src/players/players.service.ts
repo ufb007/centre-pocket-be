@@ -13,13 +13,15 @@ export class PlayersService {
         private playersRepository: Repository<Player>
     ){}
 
-    async getAllPlayers(): Promise<Player[]> {
-        return await this.playersRepository.find({
+    async getAllPlayers(): Promise<PlayerResponseDto[]> {
+        const players = await this.playersRepository.find({
             relations: ['profile']
         });
+
+        return players.map((player) => new PlayerResponseDto(player))
     }
 
-    getPlayerByUUID(uuid: string): Promise<Player | null> {
+    getPlayerByUUID(uuid: string): Promise<PlayerResponseDto | null> {
         return this.playersRepository.findOne({ where: {uuid}, relations: ['profile'] });
     }
 
@@ -51,7 +53,7 @@ export class PlayersService {
             }
         )
 
-        return new PlayerResponseDto(updatedPlayer)
+        return new PlayerResponseDto(updatedPlayer);
     }
 
     deletePlayer(uuid: string) {

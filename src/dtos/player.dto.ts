@@ -1,6 +1,5 @@
-import { Exclude } from "class-transformer";
+import { Exclude, Expose } from "class-transformer";
 import { IsString, IsEmail, IsOptional } from "class-validator";
-import { IPlayer } from "src/players/players.interface";
 
 export class CreatePlayerDto {
     @IsString()
@@ -29,6 +28,10 @@ export class UpdatePlayerDto {
     lastName: string;
 
     @IsOptional()
+    @IsString()
+    alias: string;
+
+    @IsOptional()
     @IsEmail()
     email: string;
 
@@ -42,11 +45,14 @@ export class UpdatePlayerDto {
 }
 
 export class PlayerResponseDto {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string;
-    nationality: string;
+    @Exclude()
+    password: string;
+
+    @Expose({name: "createdAt"})
+    created_at: Date;
+
+    @Exclude()
+    updated_at: Date;
 
     constructor(partial: Partial<PlayerResponseDto>) {
         Object.assign(this, partial);
