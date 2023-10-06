@@ -10,12 +10,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Player } from './entities/Player';
 import { PlayersModule } from './players/players.module';
 import { TournamentsModule } from './tournaments/tournaments/tournaments.module';
+import { FacebookStrategy } from './meta.strategy';
 
 @Module({
   controllers: [
     AppController,
   ],
-  providers: [AppService, {
+  providers: [AppService, FacebookStrategy, {
     provide: APP_INTERCEPTOR,
     useClass: ClassSerializerInterceptor
   }],
