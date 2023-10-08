@@ -2,7 +2,7 @@ import { Column, CreateDateColumn, Entity, Generated, PrimaryGeneratedColumn, Up
 
 export type GameType = "9ball" | "8ball" | "10ball" | "straight";
 
-@Entity()
+@Entity('tournaments')
 export class Tournaments {
     @PrimaryGeneratedColumn()
     public id: number;

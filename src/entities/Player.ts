@@ -10,7 +10,7 @@ import {
 } from "typeorm"
 import { Profile } from "./Profile";
 
-@Entity()
+@Entity('players')
 export class Player {
     @PrimaryGeneratedColumn()
     public id: number;
@@ -23,7 +23,7 @@ export class Player {
     @Index({ unique: true })
     public email: string;
 
-    @Column()
+    @Column({ default: null })
     public password: string;
 
     @Column()
@@ -32,13 +32,13 @@ export class Player {
     @Column()
     public lastName: string;
 
-    @Column()
+    @Column({ default: null })
     public alias: string;
 
-    @Column()
+    @Column({ default: null })
     public phone: string;
 
-    @Column()
+    @Column({ default: null })
     public nationality: string;
 
     @CreateDateColumn()
