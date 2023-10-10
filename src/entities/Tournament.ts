@@ -1,10 +1,10 @@
-import { Column, CreateDateColumn, Entity, Generated, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, Generated, JoinColumn, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { TournamentPlayer } from "./TournamentPlayer";
 
 export type GameType = "9ball" | "8ball" | "10ball" | "straight";
 
 @Entity('tournaments')
-export class Tournaments {
+export class Tournament {
     @PrimaryGeneratedColumn()
     public id: number;
 
@@ -34,7 +34,7 @@ export class Tournaments {
 
     @Column({
         type: 'enum',
-        enum: [8, 16, 32, 48, 132]
+        enum: [8, 16, 32, 64, 128]
     })
     public max_players: number;
 
@@ -59,4 +59,8 @@ export class Tournaments {
 
     @UpdateDateColumn()
     public updated_at: Date;
+
+    @OneToMany(() => TournamentPlayer, tournament_players => tournament_players.tournaments)
+    @JoinColumn()
+    public tournament_players: TournamentPlayer
 }

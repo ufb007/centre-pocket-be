@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from "typeorm";
-import { Tournaments } from "./Tournaments";
+import { Tournament } from "./Tournament";
 import { Player } from "./Player";
 
 @Entity("tournament_players")
@@ -22,9 +22,9 @@ export class TournamentPlayer {
     })
     public paid: number;
 
-    @ManyToOne(() => Tournaments)
+    @ManyToOne(() => Tournament)
     @JoinColumn({ name: 'tournament_id' })
-    public tournaments: Tournaments[]
+    public tournaments: Tournament[]
 
     @ManyToOne(() => Player)
     @JoinColumn({ name: 'player_id' })
