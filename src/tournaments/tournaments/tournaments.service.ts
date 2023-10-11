@@ -21,7 +21,15 @@ export class TournamentsService {
     }
 
     async getTournamentByUUID(uuid: string): Promise<TournamentResponseDto | null> {
-        return this.tournamentRepository.findOne({ where: { uuid }, relations: ['tournament_players']});
+        return await this.tournamentRepository.findOne(
+            {
+                where: { uuid }, 
+                relations: {
+                    tournament_players: {
+                        players: true
+                    }
+                }
+            });
     }
 
     async createTournament(body) {

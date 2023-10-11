@@ -1,5 +1,6 @@
 import { Column, CreateDateColumn, Entity, Generated, JoinColumn, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { TournamentPlayer } from "./TournamentPlayer";
+import { Exclude } from "class-transformer";
 
 export type GameType = "9ball" | "8ball" | "10ball" | "straight";
 
@@ -57,6 +58,7 @@ export class Tournament {
     @CreateDateColumn()
     public created_at: Date;
 
+    @Exclude()
     @UpdateDateColumn()
     public updated_at: Date;
 

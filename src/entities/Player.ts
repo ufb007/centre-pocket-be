@@ -9,6 +9,7 @@ import {
     JoinColumn 
 } from "typeorm"
 import { Profile } from "./Profile";
+import { Exclude, Expose } from "class-transformer";
 
 @Entity('players')
 export class Player {
@@ -23,6 +24,7 @@ export class Player {
     @Index({ unique: true })
     public email: string;
 
+    @Exclude()
     @Column({ default: null })
     public password: string;
 
@@ -41,9 +43,11 @@ export class Player {
     @Column({ default: null })
     public nationality: string;
 
+    @Expose({ name: 'createdAt' })
     @CreateDateColumn()
     public created_at: Date;
 
+    @Exclude()
     @UpdateDateColumn()
     public updated_at: Date;
 

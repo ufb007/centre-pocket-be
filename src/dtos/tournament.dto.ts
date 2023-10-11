@@ -1,15 +1,15 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { Exclude, Expose } from "class-transformer";
 import { IsDate, IsEnum, IsNumber, IsString } from "class-validator";
 
-type tournamentPlayerType = {
-    id: number,
-    playing: 'pending' | 'yes' | 'no',
+export interface tournamentPlayerType {
+    id: number;
+    playing: 'pending' | 'yes' | 'no';
+    paid: 0 | 1;
+    tournament_id: number;
+    player_id: number;
+    created_at: Date;
     updated_at: Date
-}
-
-export class TournamentPlayerResponseDto {
-    tournament_players: tournamentPlayerType
 }
 
 export class CreateTournamentDto {
@@ -41,19 +41,20 @@ export class CreateTournamentDto {
     status: string;
 }
 
-@Injectable()
-export class TournamentResponseDto extends TournamentPlayerResponseDto {
+export class TournamentResponseDto {
+    @Expose()
+    id: number;
+
+    @Expose()
+    uuid: string;
+
     @Expose({name: "createdAt"})
     created_at: Date;
 
     @Exclude()
     updated_at: Date;
 
-    @Exclude()
-    tournament_players: tournamentPlayerType
-
     constructor(partial: Partial<TournamentResponseDto>) {
-        super()
         Object.assign(this, partial);
     }
 }

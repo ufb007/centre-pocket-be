@@ -16,10 +16,14 @@ import { FacebookStrategy } from './meta.strategy';
   controllers: [
     AppController,
   ],
-  providers: [AppService, FacebookStrategy, {
-    provide: APP_INTERCEPTOR,
-    useClass: ClassSerializerInterceptor
-  }],
+  providers: [
+    AppService, 
+    FacebookStrategy, 
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ClassSerializerInterceptor
+    }
+  ],
   imports: [
     ConfigModule.forRoot({
       isGlobal: true

@@ -1,6 +1,7 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from "typeorm";
 import { Tournament } from "./Tournament";
 import { Player } from "./Player";
+import { Exclude, Expose } from "class-transformer";
 
 @Entity("tournament_players")
 @Unique(["tournaments", "players"])
@@ -30,9 +31,11 @@ export class TournamentPlayer {
     @JoinColumn({ name: 'player_id' })
     public players: Player[]
 
+    @Expose({name: "createdAt"})
     @CreateDateColumn()
     public created_at: Date;
 
+    @Exclude()
     @UpdateDateColumn()
     public updated_at: Date;
 }
