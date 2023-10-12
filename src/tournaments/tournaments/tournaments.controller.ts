@@ -20,7 +20,6 @@ export class TournamentsController {
         @Param('uuid', ParseUUIDPipe) uuid: string
     ): Promise<TournamentResponseDto> {
         return this.tournamentsService.getTournamentByUUID(uuid).then((tournament) => {
-            console.log(tournament)
             return new TournamentResponseDto(tournament);
         })
     }
