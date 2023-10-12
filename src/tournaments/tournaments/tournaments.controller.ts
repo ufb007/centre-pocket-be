@@ -15,6 +15,15 @@ export class TournamentsController {
         })
     }
 
+    @Get(':status')
+    getTournamentsByStatus(
+        @Param('status') status: 'upcoming' | 'active' | 'finished'
+    ): Promise<TournamentResponseDto[]> {
+        return this.tournamentsService.getAllTournaments(status).then(tournaments => {
+            return tournaments.map(tournament => new TournamentResponseDto(tournament))
+        })
+    }
+
     @Get(':uuid')
     getTournament(
         @Param('uuid', ParseUUIDPipe) uuid: string

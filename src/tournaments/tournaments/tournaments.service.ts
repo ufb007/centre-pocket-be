@@ -12,9 +12,12 @@ export class TournamentsService {
         private tournamentRepository: Repository<Tournament>
     ) {}
 
-    async getAllTournaments(): Promise<TournamentResponseDto[]> {
+    async getAllTournaments(status?: 'upcoming' | 'active' | 'finished'): Promise<TournamentResponseDto[]> {
         const tournaments = await this.tournamentRepository.find({
-            relations: ['tournament_players']
+            where: { status: status?? 'upcoming' },
+            relations: {
+                tournament_players: true
+            }
         });
 
         return tournaments.map((tournament) => new TournamentResponseDto(tournament));
