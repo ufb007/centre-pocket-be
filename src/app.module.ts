@@ -11,6 +11,7 @@ import { Player } from './entities/Player';
 import { PlayersModule } from './players/players.module';
 import { TournamentsModule } from './tournaments/tournaments/tournaments.module';
 import { FacebookStrategy } from './meta.strategy';
+import { MessagesModule } from './messages/messages.module';
 
 @Module({
   controllers: [
@@ -43,7 +44,8 @@ import { FacebookStrategy } from './meta.strategy';
     ReportModule, 
     ProductsModule,
     PlayersModule,
-    TournamentsModule
+    TournamentsModule,
+    MessagesModule
   ]
 })
 
