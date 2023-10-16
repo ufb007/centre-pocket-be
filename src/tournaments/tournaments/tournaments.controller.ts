@@ -24,7 +24,7 @@ export class TournamentsController {
         })
     }
 
-    @Get(':uuid')
+    @Get('tournament/:uuid')
     getTournament(
         @Param('uuid', ParseUUIDPipe) uuid: string
     ): Promise<TournamentResponseDto> {

@@ -16,7 +16,9 @@ export class TournamentsService {
         const tournaments = await this.tournamentRepository.find({
             where: { status: status?? 'upcoming' },
             relations: {
-                tournament_players: true
+                tournament_players: {
+                    players: true
+                }
             }
         });
 
