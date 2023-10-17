@@ -17,7 +17,9 @@ export class TournamentsService {
             where: { status: status?? 'upcoming' },
             relations: {
                 tournament_players: {
-                    players: true
+                    players: {
+                        profile: true
+                    }
                 }
             }
         });
@@ -31,7 +33,9 @@ export class TournamentsService {
                 where: { uuid }, 
                 relations: {
                     tournament_players: {
-                        players: true
+                        players: {
+                            profile: true
+                        }
                     }
                 }
             });
