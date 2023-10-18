@@ -9,8 +9,10 @@ export class ContentCreationController {
     getFirstInitialAIWorking() {
         const content = this.contentCreationService.getContent()
 
-        content.then(value => {
+        /*content.then(value => {
             console.log('show value - ', value.choices[0].message)
-        })
+        })*/
+
+        return content
     }
 }
