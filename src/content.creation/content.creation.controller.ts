@@ -6,7 +6,11 @@ export class ContentCreationController {
     constructor(private contentCreationService: ContentCreationService) {}
 
     @Get()
-    async getFirstInitialAIWorking() {
-        this.contentCreationService.getContent()
+    getFirstInitialAIWorking() {
+        const content = this.contentCreationService.getContent()
+
+        content.then(value => {
+            console.log('show value - ', value.choices[0].message)
+        })
     }
 }
