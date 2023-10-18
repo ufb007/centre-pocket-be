@@ -9,9 +9,10 @@ import { ProductsModule } from './products/products.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Player } from './entities/Player';
 import { PlayersModule } from './players/players.module';
-import { TournamentsModule } from './tournaments/tournaments/tournaments.module';
+import { TournamentsModule } from './tournaments/tournaments.module';
 import { FacebookStrategy } from './meta.strategy';
 import { MessagesModule } from './messages/messages.module';
+import { ContentCreationModule } from './content.creation/content.creation.module';
 
 @Module({
   controllers: [
@@ -45,7 +46,8 @@ import { MessagesModule } from './messages/messages.module';
     ProductsModule,
     PlayersModule,
     TournamentsModule,
-    MessagesModule
+    MessagesModule,
+    ContentCreationModule
   ]
 })
 
