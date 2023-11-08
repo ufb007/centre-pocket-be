@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Player } from 'src/entities/Player';
+import { Player } from './players.entities'; 
 import { Repository } from 'typeorm';
 import { v4 as uuid } from 'uuid';
-import { IPlayer } from './players.interface';
-import { PlayerResponseDto } from 'src/dtos/player.dto';
+import { CreatePlayerDto, PlayerResponseDto, UpdatePlayerDto } from 'src/players/players.dto';
 
 @Injectable()
 export class PlayersService {
@@ -14,18 +13,16 @@ export class PlayersService {
     ){}
 
     async getAllPlayers(): Promise<PlayerResponseDto[]> {
-        const players = await this.playersRepository.find({
+        return await this.playersRepository.find({
             relations: ['profile']
         });
-
-        return players.map((player) => new PlayerResponseDto(player))
     }
 
     getPlayerByUUID(uuid: string): Promise<PlayerResponseDto | null> {
         return this.playersRepository.findOne({ where: {uuid}, relations: ['profile'] });
     }
 
-    async createPlayer(body: IPlayer) {
+    async createPlayer(body: CreatePlayerDto): Promise<Player> {
         const player = this.playersRepository.create({
             uuid: uuid(),
             ...body
@@ -39,21 +36,16 @@ export class PlayersService {
         )
     }
 
-    async updatePlayer(uuid: string, body: IPlayer): Promise<PlayerResponseDto | null> {
+    async updatePlayer(uuid: string, body: UpdatePlayerDto) {
         const player = await this.getPlayerByUUID(uuid);
 
         if (!player) return;
 
-        const updatedPlayer = {...player, ...body}
-
-        await this.playersRepository.save(updatedPlayer).catch(
+        return await this.playersRepository.save({...player, ...body}).catch(
             error => {
-                console.log(error)
                 return error.code
             }
         )
-
-        return new PlayerResponseDto(updatedPlayer);
     }
 
     deletePlayer(uuid: string) {

@@ -1,6 +1,6 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from "typeorm";
 import { Tournament } from "./Tournament";
-import { Player } from "./Player";
+import { Player } from "src/players/players.entities"; 
 import { Exclude, Expose } from "class-transformer";
 
 @Entity("tournament_players")

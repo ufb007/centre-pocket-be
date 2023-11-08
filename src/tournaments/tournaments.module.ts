@@ -4,7 +4,6 @@ import { TournamentsService } from './tournaments.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Tournament } from 'src/entities/Tournament';
 import { TournamentPlayer } from 'src/entities/TournamentPlayer';
-import { Fixtures } from './fixtures/fixtures';
 import { Fixture } from 'src/entities/Fixture';
 
 @Module({
@@ -12,7 +11,7 @@ import { Fixture } from 'src/entities/Fixture';
     TypeOrmModule.forFeature([Tournament, TournamentPlayer, Fixture])
   ],
   controllers: [TournamentsController],
-  providers: [TournamentsService, Fixtures],
+  providers: [TournamentsService],
   exports: [TypeOrmModule]
 })
 export class TournamentsModule {}

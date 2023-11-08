@@ -7,12 +7,15 @@ import { SummaryModule } from './summary/summary.module';
 import { ReportModule } from './report/report.module';
 import { ProductsModule } from './products/products.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Player } from './entities/Player';
+import { Player } from './players/players.entities'; 
 import { PlayersModule } from './players/players.module';
 import { TournamentsModule } from './tournaments/tournaments.module';
 import { FacebookStrategy } from './meta.strategy';
 import { MessagesModule } from './messages/messages.module';
 import { ContentCreationModule } from './content.creation/content.creation.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { join } from 'path';
 
 @Module({
   controllers: [
@@ -29,6 +32,11 @@ import { ContentCreationModule } from './content.creation/content.creation.modul
   imports: [
     ConfigModule.forRoot({
       isGlobal: true
+    }),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      playground: true,
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql')
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',

@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put } from '@nestjs/common';
 import { PlayersService } from './players.service';
-import { CreatePlayerDto, PlayerResponseDto, UpdatePlayerDto } from 'src/dtos/player.dto';
+import { CreatePlayerDto, PlayerResponseDto, UpdatePlayerDto } from 'src/players/players.dto';
 
 @Controller('players')
 export class PlayersController {

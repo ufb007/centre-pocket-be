@@ -1,5 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Player } from "./Player";
+import { Player } from "src/players/players.entities"; 
 import { Tournament } from "./Tournament";
 
 @Entity('fixtures')
