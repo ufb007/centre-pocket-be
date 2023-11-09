@@ -29,9 +29,37 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type TournamentPlayer {
+  id: Int!
+  playing: String!
+  paid: Int!
+  tournaments: Tournament!
+  players: Player!
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+type Tournament {
+  id: Int!
+  uuid: String!
+  name: String!
+  description: String!
+  game_type: String!
+  type: String!
+  max_players: Int!
+  race_to: Int!
+  cover_image: Int!
+  start_date: DateTime!
+  status: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  tournament_players: [TournamentPlayer!]!
+}
+
 type Query {
   getAllPlayers: [Player!]!
   getPlayerByUUID(uuid: String!): Player!
+  tournaments(status: String!): [Tournament!]!
 }
 
 type Mutation {

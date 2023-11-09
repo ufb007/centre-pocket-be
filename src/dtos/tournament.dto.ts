@@ -1,4 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
+import { Field, InputType } from "@nestjs/graphql";
 import { Exclude, Expose } from "class-transformer";
 import { IsDate, IsEnum, IsNumber, IsString } from "class-validator";
 
@@ -12,32 +13,42 @@ export interface tournamentPlayerType {
     updated_at: Date
 }
 
+@InputType()
 export class CreateTournamentDto {
     @IsString()
+    @Field()
     name: string;
 
     @IsString()
+    @Field()
     description: string;
 
     @IsEnum(['9ball', '8ball', '10ball', 'straight'])
+    @Field()
     game_type: string;
 
     @IsEnum(['single', 'double', 'round_robin'])
+    @Field()
     type: string;
 
     @IsEnum([8, 16, 32, 64, 128])
+    @Field()
     max_players: number;
 
     @IsNumber()
+    @Field()
     race_to: number;
 
     @IsString()
+    @Field()
     cover_image: string;
 
     @IsDate()
+    @Field()
     start_date: Date;
 
     @IsEnum(['upcoming', 'active', 'finished'])
+    @Field()
     status: string;
 }
 

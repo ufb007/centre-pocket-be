@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TournamentResponseDto } from 'src/dtos/tournament.dto';
-import { Tournament } from 'src/entities/Tournament';
+import { Tournament } from './tournaments.entities'; 
 import { Repository } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 

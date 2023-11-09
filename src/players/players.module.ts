@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { PlayersController } from './players.controller';
 import { PlayersService } from './players.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Player } from './players.entities'; 
@@ -10,7 +9,6 @@ import { PlayersResolver } from './players.resolver';
   imports: [
     TypeOrmModule.forFeature([Player, Profile]),
   ],
-  controllers: [PlayersController],
   providers: [PlayersService, PlayersResolver],
   exports: [TypeOrmModule]
 })
