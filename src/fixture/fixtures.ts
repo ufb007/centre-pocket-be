@@ -4,7 +4,7 @@ export interface CreateMatchInterface {
     createMatch(): void
 }
 
-export class Fixture {
+export class Fixtures {
     constructor(
         protected players: TournamentPlayer[],
         protected max_players: number
