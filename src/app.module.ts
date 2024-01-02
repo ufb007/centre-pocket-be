@@ -16,6 +16,8 @@ import { ContentCreationModule } from './content.creation/content.creation.modul
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
+import { FixturesService } from './fixtures/fixtures.service';
+import { FixturesResolver } from './fixtures/fixtures.resolver';
 
 @Module({
   controllers: [
@@ -27,7 +29,7 @@ import { join } from 'path';
     {
       provide: APP_INTERCEPTOR,
       useClass: ClassSerializerInterceptor
-    }
+    }, FixturesService, FixturesResolver
   ],
   imports: [
     ConfigModule.forRoot({

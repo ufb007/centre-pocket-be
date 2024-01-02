@@ -48,7 +48,7 @@ type Tournament {
   type: String!
   max_players: Int!
   race_to: Int!
-  cover_image: Int!
+  cover_image: String!
   start_date: DateTime!
   status: String!
   created_at: DateTime!
@@ -60,6 +60,7 @@ type Query {
   getAllPlayers: [Player!]!
   getPlayerByUUID(uuid: String!): Player!
   tournaments(status: String!): [Tournament!]!
+  tournament(uuid: String!): Tournament!
 }
 
 type Mutation {

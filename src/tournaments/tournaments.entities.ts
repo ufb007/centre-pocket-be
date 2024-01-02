@@ -54,7 +54,7 @@ export class Tournament {
     public race_to: number;
 
     @Column()
-    @Field(type => Int)
+    @Field(type => String)
     public cover_image: string;
 
     @Column()
